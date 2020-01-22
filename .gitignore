@@ -1,0 +1,14 @@
+bin/
+.idea/
+cmake-build-debug/
+cmake-build-release/
+build/
+output/
+venv/
+*.DS_Store
+solver.log
+*.pyc
+*.html
+*.e*
+*.lp
+core.*

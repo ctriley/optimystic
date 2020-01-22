@@ -23,7 +23,7 @@ apt install build-essential
 apt install cmake
 ```
 
-###Example Model
+### Example Model
 The following is an example of the syntax required to build a CPLEX or Gurobi model.
 This example was taken from the Gurobi Documentation, found [here](https://www.gurobi.com/documentation/9.0/examples/mip1_cpp_cpp.html)
 ```

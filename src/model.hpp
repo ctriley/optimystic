@@ -110,6 +110,9 @@ namespace optimystic {
           const std::shared_ptr<Variable>& new_var, double coeff);
       void setOutput(bool b);
       void setSense(int s);
+      void addQuadraticTermToObjective(const std::vector<double> &coeffs,
+          const std::vector<std::shared_ptr<Variable>> &vars1,
+          const std::vector<std::shared_ptr<Variable>> &vars2);
     private:
 #ifdef GUROBI
       GRBModel* _grb_model;

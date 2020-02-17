@@ -54,6 +54,7 @@ namespace optimystic {
 #ifdef GUROBI
     GRBLinExpr expr;
     std::vector<GRBVar> grb_vars;
+    grb_vars.reserve(vars.size());
     for(auto var : vars) {
       grb_vars.push_back(*(var->getGRBVar()));
     }
@@ -81,6 +82,28 @@ namespace optimystic {
   std::shared_ptr<IloRange> shared_constraint = std::make_shared<IloRange>(constraint);
   return std::make_shared<Constraint>(_cplex_env, _cplex_model, _cplex_solver,
       shared_constraint);
+#endif
+  }
+
+  void Model::addQuadraticTermToObjective(const std::vector<double> &coeffs,
+      const std::vector<std::shared_ptr<Variable>> &vars1,
+      const std::vector<std::shared_ptr<Variable>> &vars2) {
+#ifdef GUROBI
+    auto obj = _grb_model->getObjective();
+    std::vector<GRBVar> grb_vars1;
+    std::vector<GRBVar> grb_vars2;
+    grb_vars1.reserve(vars1.size());
+    grb_vars2.reserve(vars2.size());
+    for(auto el : vars1) {
+      grb_vars1.push_back(*(el->getGRBVar()));
+    }
+    for(auto el : vars2) {
+      grb_vars2.push_back(*(el->getGRBVar()));
+    }
+    obj.addTerms(&coeffs[0], &grb_vars1[0], &grb_vars2[0], vars1.size());
+    _grb_model->setObjective(obj);
+#elif defined CPLEX
+  throw std::logic_error("Quadradic objective function not yet implemented for CPLEX");
 #endif
   }
 

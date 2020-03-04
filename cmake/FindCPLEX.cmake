@@ -23,7 +23,7 @@ if (UNIX)
         set(CPLEX_ARCH x86)
     endif ()
     if (APPLE)
-        set(CPLEX_ILOG_DIRS $ENV{HOME}/Applications/IBM/ILOG ${CPLEX_ILOG_DIRS})
+        set(CPLEX_ILOG_DIRS $ENV{HOME}/Applications/IBM/ILOG ${CPLEX_ILOG_DIRS} /Applications)
         foreach (suffix "osx" "darwin9_gcc4.0")
             set(CPLEX_LIB_PATH_SUFFIXES
                     ${CPLEX_LIB_PATH_SUFFIXES} lib/${CPLEX_ARCH}_${suffix}/static_pic)
@@ -40,7 +40,12 @@ else ()
         set(CPLEX_ARCH x86)
         set(CPLEX_ILOG_DIRS "C:/Program Files (x86)/IBM/ILOG" ${CPLEX_ILOG_DIRS})
     endif ()
-    if (MSVC10)
+    if("${MSVC_TOOLSET_VERSION}" STREQUAL "142")
+        set(CPLEX_LIB_PATH_SUFFIXES
+                lib/${CPLEX_ARCH}_windows_vs2017/stat_mda)
+        set(CPLEX_LIB_PATH_SUFFIXES_DEBUG
+                lib/${CPLEX_ARCH}_windows_vs2017/stat_mdd)
+    elseif (MSVC10)
         set(CPLEX_LIB_PATH_SUFFIXES
                 lib/${CPLEX_ARCH}_windows_vs2010/stat_mda)
         set(CPLEX_LIB_PATH_SUFFIXES_DEBUG
@@ -58,15 +63,15 @@ if (NOT CPLEX_STUDIO_DIR)
         list(SORT CPLEX_STUDIO_DIRS)
         list(REVERSE CPLEX_STUDIO_DIRS)
         if (CPLEX_STUDIO_DIRS)
-            list(GET CPLEX_STUDIO_DIRS 0 CPLEX_STUDIO_DIR_)
-            message(STATUS "Found CPLEX Studio: ${CPLEX_STUDIO_DIR_}")
+            list(GET CPLEX_STUDIO_DIRS 0 CPLEX_STUDIO_DIR)
+            message(STATUS "Found CPLEX Studio: ${CPLEX_STUDIO_DIR}")
             break ()
         endif ()
     endforeach ()
-    if (NOT CPLEX_STUDIO_DIR_)
-        set(CPLEX_STUDIO_DIR_ CPLEX_STUDIO_DIR-NOTFOUND)
+    if (NOT CPLEX_STUDIO_DIR)
+        set(CPLEX_STUDIO_DIR CPLEX_STUDIO_DIR-NOTFOUND)
     endif ()
-    set(CPLEX_STUDIO_DIR ${CPLEX_STUDIO_DIR_} CACHE PATH
+    set(CPLEX_STUDIO_DIR ${CPLEX_STUDIO_DIR} CACHE PATH
             "Path to the CPLEX Studio directory")
 endif ()
 

@@ -6,4 +6,4 @@ set(SOURCE_FILES
         constraint.cpp)
 
 add_library(${OPTIMYSTIC_LIB} SHARED ${SOURCE_FILES})
-target_link_libraries(${OPTIMYSTIC_LIB} ${requiredlibs} ${GUROBI_LIBRARIES})
+target_link_libraries(${OPTIMYSTIC_LIB} ${requiredlibs})

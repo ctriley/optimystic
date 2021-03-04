@@ -37,6 +37,8 @@ if ( GUROBI_ENABLE )
 	    MESSAGE(${GUROBI_INCLUDE_DIR})
         find_library( GUROBI_LIBRARY
                 NAMES gurobi
+                gurobi91
+                gurobi90
                 gurobi81
                 gurobi80
                 gurobi75

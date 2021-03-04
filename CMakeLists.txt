@@ -28,6 +28,7 @@ FIND_PACKAGE(CPLEX)
 if(GUROBI_FOUND)
     INCLUDE_DIRECTORIES("${GUROBI_INCLUDE_DIR}")
     add_definitions(-DGUROBI)
+    set(requiredlibs ${requiredlibs} ${GUROBI_LIBRARIES})
 endif()
 
 

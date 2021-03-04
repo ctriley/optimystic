@@ -58,6 +58,16 @@ int main() {
 }
 ```
 
+
+### Testing
+```
+mkdir build
+cmake -DCMAKE_BUILD_TYPE=Debug ..
+make
+cd ..
+./bin/optimystic-test
+```
+
 ## Built With
 
 * [cmake](https://cmake.org/)
@@ -73,7 +83,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c6
 
 * **Connor Riley** - *Initial work* - [Website](https://ctriley.github.io/)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributors](https://github.com/ctriley/optimystic/graphs/contributors) who participated in this project.
 
 ## License
 
